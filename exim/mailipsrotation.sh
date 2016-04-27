@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# Rotate you server IPs in /etc/mailips
+# Rotate you server IPs in /etc/mailips.
 # https://documentation.cpanel.net/display/CKB/How+to+Configure+Exim%2527s+Outgoing+IP+Address#HowtoConfigureExim'sOutgoingIPAddress-The/etc/mailipsfile
 #
 # Notes:
@@ -13,13 +13,25 @@
 #
 # If your server don't have this file, create it manually.
 #
-# 2. This script will run forever (while true), so if you modify reserved IPs, you
-# have to kill it and run again.
+# 2. If you don't want this script to use all your IPs, you should add those IPs
+# to #excluded file.
 #
+# 3. This script will run forever (while true), so if you modify reserved IPs,
+# you will have to kill it and run again.
+#
+# 4. This script will update /etc/mailips and put a new global outgoing IP. If
+# you have customizations, this will not work for you.
+#
+# Don't worry if you read this after you ran the script. I made a backup of your
+# customizations to /etc/mailips.bkp
+# You can thank me later ;)
 ##
 
 # Set the time to wait until a new IP rotation. In seconds.
 sleeptime=300 # 5 minutes
+
+# Backing up any customizations
+cp -nv /etc/mailips{,.bkp}
 
 # Check if we have a file containing reserved/excluded IPs
 excluded="/root/mailipsrotation.excluded"
@@ -37,7 +49,7 @@ numips=`echo ${#included[@]}`
 while true; do
   theone=`shuf -i 1-$numips -n 1`
   echo "*: $theone" > /etc/mailips
-  echo $theone
+  echo "`date` -> $theone"
 
   # Debug / Log
   #

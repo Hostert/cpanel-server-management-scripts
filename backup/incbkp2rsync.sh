@@ -6,13 +6,10 @@
 #
 # Notes:
 # 1. Choose how many process you want to run at the same time.
-# 2. This script will not handle space in your remote storage. You have to lookup
-# often to avoid issues.
-# 3. If you interrupt the script, the processes will remain running in background,
-# so you will have to kill them manually.
-# 4. You have to create your keys and tell script where to find your private-key
-# 5. This script assumes you are root and will connect to your remote storage as
-# root.
+# 2. This script will not handle space in your remote storage. You have to lookup often to avoid issues.
+# 3. If you interrupt the script, the processes will remain running in background, so you will have to kill them manually.
+# 4. You have to create your keys and tell script where to find your private-key.
+# 5. This script assumes you are root and will connect to your remote storage as root.
 #
 ##
 
@@ -25,7 +22,7 @@ today=`date +%F`
 # How many processes: 1, 2 or 5
 proc=2
 
-# Text Colloring
+# Text Coloring
 black()   { printf '\033[0m'; }
 bgreen()  { printf '\033[1;32m'; }
 bblue()   { printf '\033[1;34m'; }

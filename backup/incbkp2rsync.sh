@@ -32,9 +32,9 @@ bcyan()   { printf '\033[1;36m'; }
 # Main routine
 do_routine(){
   echo "[$user] `bblue`starting`black`"
-  echo "[$user] `bcyan`compacting`black`"; tar -cf $user.tar $user
-  echo "[$user] `bgreen`sending`black`"; rsync --partial -aue "ssh -i $key" $user.tar root@$remote_host:$remote_dir/$today/
-  echo "[$user] `byellow`removing`black`"; rm -f $user.tar;
+  echo "[$user] `bcyan`compacting`black`";  tar -cf $user.tar $user
+  echo "[$user] `bgreen`sending`black`";    rsync --partial -aue "ssh -i $key" $user.tar root@$remote_host:$remote_dir/$today/
+  echo "[$user] `byellow`removing`black`";  rm -f $user.tar
   echo "[$user] `bgreen`done`black`"
 }
 

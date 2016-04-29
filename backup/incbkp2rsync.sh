@@ -26,19 +26,19 @@ today=`date +%F`
 proc=2
 
 # Text Colloring
-black()		{ printf '\033[0m'; }
-bgreen()	{ printf '\033[1;32m'; }
-bblue()		{ printf '\033[1;34m'; }
-byellow()	{ printf '\033[1;33m'; }
-bcyan()		{ printf '\033[1;36m'; }
+black()   { printf '\033[0m'; }
+bgreen()  { printf '\033[1;32m'; }
+bblue()   { printf '\033[1;34m'; }
+byellow() { printf '\033[1;33m'; }
+bcyan()   { printf '\033[1;36m'; }
 
 # Main routine
 do_routine(){
-	echo "[$user] `bblue`starting`black`"
-	echo "[$user] `bcyan`compacting`black`"; tar -cf $user.tar $user
+  echo "[$user] `bblue`starting`black`"
+  echo "[$user] `bcyan`compacting`black`"; tar -cf $user.tar $user
   echo "[$user] `bgreen`sending`black`"; rsync --partial -aue "ssh -i $key" $user.tar root@$remote_host:$remote_dir/$today/
-	echo "[$user] `byellow`removing`black`"; rm -f $user.tar;
-	echo "[$user] `bgreen`done`black`"
+  echo "[$user] `byellow`removing`black`"; rm -f $user.tar;
+  echo "[$user] `bgreen`done`black`"
 }
 
 # Removing any backups from previous run
@@ -48,20 +48,20 @@ rm -fv *.tar
 
 # Starting to list each folder in /backup/incremental/accounts and run the do_routine function
 case $proc in
-	1)
-		ls | while read user; do do_routine; done
-	;;
-	2)
-		ls -d [a-m]* | while read user; do do_routine; done &
-		ls -d [n-z]* | while read user; do do_routine; done &
-		ls -d [0-9]* | while read user; do do_routine; done
-	;;
-	5)
-		ls -d [a-e]* | while read user; do do_routine; done &
-		ls -d [f-j]* | while read user; do do_routine; done &
-		ls -d [k-o]* | while read user; do do_routine; done &
-		ls -d [p-t]* | while read user; do do_routine; done &
-		ls -d [u-z]* | while read user; do do_routine; done &
-		ls -d [0-9]* | while read user; do do_routine; done
-	;;
+  1)
+    ls | while read user; do do_routine; done
+  ;;
+  2)
+    ls -d [a-m]* | while read user; do do_routine; done &
+    ls -d [n-z]* | while read user; do do_routine; done &
+    ls -d [0-9]* | while read user; do do_routine; done
+  ;;
+  5)
+    ls -d [a-e]* | while read user; do do_routine; done &
+    ls -d [f-j]* | while read user; do do_routine; done &
+    ls -d [k-o]* | while read user; do do_routine; done &
+    ls -d [p-t]* | while read user; do do_routine; done &
+    ls -d [u-z]* | while read user; do do_routine; done &
+    ls -d [0-9]* | while read user; do do_routine; done
+  ;;
 esac

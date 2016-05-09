@@ -10,8 +10,6 @@ retention=3 # days
 black()   { printf '\033[0m'; }
 bgreen()  { printf '\033[1;32m'; }
 bblue()   { printf '\033[1;34m'; }
-byellow() { printf '\033[1;33m'; }
-bcyan()   { printf '\033[1;36m'; }
 
 if [ ! -e /backup/mysql ]; then
   mkdir /backup/mysql
